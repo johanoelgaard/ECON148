@@ -1,2 +1,2 @@
 # ECON148
-UCB ECON 148 Spring 2024
+Repository for weekly labs and projects in the course ECON 148 Data Science for Economists Spring 2024 at Unviersity of California Berkeley
