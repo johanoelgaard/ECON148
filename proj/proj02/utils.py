@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
-plt.style.use("seaborn-muted")
+plt.style.use("seaborn-v0_8-muted")
 
 def find_x_pos(widths):
     cumulative_widths = [0]
@@ -238,7 +238,7 @@ def calc_profit_by_hour(selection, hour, demand, sorted_joined_table):
 # Large plotting functions for Mariel Boatlift notebook
 import numpy as np
 import matplotlib.pyplot as plt
-plt.style.use("seaborn-muted")
+plt.style.use("seaborn-v0_8-muted")
 
 def plot_ue_by_ethrace(miami, not_miami):
     plt.figure(figsize=[14,12])
