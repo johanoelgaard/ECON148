@@ -12,6 +12,7 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
         indep = model.model.exog_names[1:]
         b_ests = []
         b_pvals = []
+        b_bse = []
         df['yhat'] = model.predict(df[indep])
         df['ehat'] = model.resid
 
@@ -27,21 +28,35 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
 
                 boot_model = smf.ols(model.model.formula, data=df).fit(cov_type='cluster', cov_kwds={'groups': df[cluster]})
                 b_ests.append(boot_model.params)
+                b_bse.append(boot_model.bse)
+
         
         # remove constant
         length = len(indep) + 1
         b_ests = np.array(b_ests)[:,1:length]
+        b_bse = np.array(b_bse)[:,1:length]
 
         
         for i, var in enumerate(indep):
-                t = b_ests[:,i].mean() / b_ests[:,i].std()
+                
+                # calculate the wald statistic for each variable
+                w_boot = (b_ests[:,i]-model.params[var]) / b_bse[:,i]
 
+                # here for simplicity we assume H0: beta = 0 as we do this for all variables, but should be adjusted if we want to generalize the function
+                w = (model.params[var]-0) / model.bse[var]
+
+                # calculate the p-value for the wald statistic
+                pval = np.mean(np.abs(w_boot) > np.abs(w))
+                b_pvals.append(pval)
+
+                # wrong way still assuming normal or student's-t distribution
+                # t = b_ests[:,i].mean() / b_ests[:,i].std()
                 # using the cluster size to determine whether to use normal or t distribution
-                if df[cluster].nunique() >= 30:
-                    b_pval = 2 * (1 - stats.norm.cdf(np.abs(t)))
-                else:
-                       b_pval = 2 * (1 - stats.t.cdf(np.abs(t),df=df[cluster].nunique()-1))
-                b_pvals.append(b_pval)
+                # if df[cluster].nunique() >= 30:
+                #     b_pval = 2 * (1 - stats.norm.cdf(np.abs(t)))
+                # else:
+                #        b_pval = 2 * (1 - stats.t.cdf(np.abs(t),df=df[cluster].nunique()-1))
+                # b_pvals.append(b_pval)
 
         return b_ests, b_pvals
         
