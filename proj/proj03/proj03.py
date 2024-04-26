@@ -3,7 +3,8 @@ import numpy as np
 import statsmodels.formula.api as smf
 from scipy import stats
 
-def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster):
+def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
+        np.random.seed(seed)
         df = data.copy(deep=True)
 
         # gather dependent variable and independent variables from model.model.formula
@@ -33,7 +34,7 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster):
 
         
         for i, var in enumerate(indep):
-                z = b_ests[:,i].mean() / model.bse[var]
+                z = b_ests[:,i].mean() / b_ests[:,i].std()
                 b_pval = 2 * (1 - stats.norm.cdf(np.abs(z)))
                 b_pvals.append(b_pval)
 
