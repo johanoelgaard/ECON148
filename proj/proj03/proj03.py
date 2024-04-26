@@ -34,8 +34,13 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
 
         
         for i, var in enumerate(indep):
-                z = b_ests[:,i].mean() / b_ests[:,i].std()
-                b_pval = 2 * (1 - stats.norm.cdf(np.abs(z)))
+                t = b_ests[:,i].mean() / b_ests[:,i].std()
+
+                # using the cluster size to determine whether to use normal or t distribution
+                if df[cluster].nunique() >= 30:
+                    b_pval = 2 * (1 - stats.norm.cdf(np.abs(t)))
+                else:
+                       b_pval = 2 * (1 - stats.t.cdf(np.abs(t),df=df[cluster].nunique()-1))
                 b_pvals.append(b_pval)
 
         return b_ests, b_pvals
