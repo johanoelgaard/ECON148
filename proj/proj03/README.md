@@ -28,4 +28,4 @@ Other than the README.md the repository contains the following folders and files
 - [proj03.py](proj/proj03/proj03.py): The python script for our wild cluster bootstrap-t implementation
 - [proj03.pdf](proj/proj03/proj03.pdf): A pdf version of the notebook
 - [ECON148_Project03.pdf](proj/proj03/ECON148_Project03.pdf): The final report for the project
-- [Sell Low and Buy High: Arbitrage and Local Price Effects in Kenyan Markets.pdf](proj/proj03/Sell%20Low%20and%20Buy%20High%3A%20Arbitrage%20and%20Local%20Price%20Effects%20in%20Kenyan%20Markets.pdf): The original paper by Marshall Burke, Lauren Falcao Bergquist, Edward Miguel
+- [Sell Low and Buy High: Arbitrage and Local Price Effects in Kenyan Markets.pdf](/Sell%20Low%20and%20Buy%20High%3A%20Arbitrage%20and%20Local%20Price%20Effects%20in%20Kenyan%20Markets.pdf): The original paper by Marshall Burke, Lauren Falcao Bergquist, Edward Miguel
