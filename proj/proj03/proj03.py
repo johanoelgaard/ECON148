@@ -29,14 +29,12 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
                 boot_model = smf.ols(model.model.formula, data=df).fit(cov_type='cluster', cov_kwds={'groups': df[cluster]})
                 b_ests.append(boot_model.params)
                 b_bse.append(boot_model.bse)
-
         
         # remove constant
         length = len(indep) + 1
         b_ests = np.array(b_ests)[:,1:length]
         b_bse = np.array(b_bse)[:,1:length]
 
-        
         for i, var in enumerate(indep):
                 
                 # calculate the wald statistic for each variable
