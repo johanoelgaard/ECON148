@@ -4,6 +4,22 @@ import statsmodels.formula.api as smf
 from scipy import stats
 
 def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
+        """
+        This function performs wild bootstrap inference for clustered data as proposed by Cameron, Gelbach, and Miller (2008).
+        
+        Args:
+        data: pandas DataFrame
+        model: statsmodels regression model
+        n_bootstraps: int, number of bootstrap samples
+        cluster: list, name of the cluster variable to use in bootstrap regressions
+        bootcluster: list, name of the cluster variable to use in bootstrap sampling
+        seed: int, random seed
+
+        Returns:
+        b_ests: numpy array, bootstrapped parameter estimates
+        b_pvals: numpy array, bootstrapped p-values
+        """
+
         np.random.seed(seed)
         df = data.copy(deep=True)
 
@@ -48,4 +64,3 @@ def cgmwildboot(data, model, n_bootstraps, cluster, bootcluster, seed=1234):
                 b_pvals.append(pval)
 
         return b_ests, b_pvals
-        
