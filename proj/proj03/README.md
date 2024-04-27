@@ -5,7 +5,7 @@ This assignment was to reproduce the analysis of a paper by Edward Miguel by tra
 
 The data used in the project can be found on the Harvard Dataverse [here](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/C8UMQP). We are using the 1.2 version of the data published on Apr 09, 2019. The necessary datasets are also included in the data folder of this repository. However, the only difference between this and the 1.0 version published on Dec 23, 2018, is the addition of citation metadata.
 
-The Python code is written and run through a Python 3.11.8 distribution and requires the following packages
+The Python code is written and run through a Python 3.11.8 distribution and requires the following packages (version number I have used in parenthesis)
 
 - ```pandas (2.1.4)```
 - ```numpy (1.26.4)```
